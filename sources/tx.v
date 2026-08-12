@@ -13,8 +13,9 @@
 // 
 // Dependencies: 
 // 
-// Revision: 0.01
+// Revision: 0.02
 // Revision 0.01 - File Created
+// Revision 0.02 - Updated with baud_tick
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +39,10 @@ module tx(
     baud_tick tick_gen(
                             .clk100mhz(clk100mhz),
                             .rst_n(rst_n),
+                            .restart(1'b0),
                             .en(tx_busy),
-                            .baud_tick(baud_tick)
+                            .baud_tick(baud_tick),
+                            .baud_half_tick()
                       ); 
     
     always@(posedge clk100mhz or negedge rst_n) begin

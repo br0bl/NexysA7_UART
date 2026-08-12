@@ -13,9 +13,10 @@
 // 
 // Dependencies: 
 // 
-// Revision: 0.02
+// Revision: 0.03
 // Revision 0.01 - File Created
 // Revision 0.02 - Fixes
+// Revision 0.03 - Half tick gen
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -24,17 +25,20 @@ module baud_tick#(parameter baud_rate = 115200)
                 (
                     input clk100mhz,
                     input rst_n,
+                    input restart,
                     input en,
-                    output wire baud_tick
+                    output wire baud_tick,
+                    output wire baud_half_tick
                 );
                 
     localparam cycles = 100_000_000/baud_rate;        
     reg [$clog2(cycles)-1:0] counter;
     
     assign baud_tick = en && (counter == (cycles - 1));
+    assign baud_half_tick = en && (counter == (cycles - 1)/2);
         
     always@(posedge clk100mhz or negedge rst_n) begin
-        if(!rst_n || !en) begin 
+        if(!rst_n || !en || restart) begin 
             counter <= 0;
         end
         else begin
