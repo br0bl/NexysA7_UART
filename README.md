@@ -4,9 +4,7 @@ By: Ben Robles
 
 
 
-v1.0 Writeup:
-
-https://docs.google.com/document/d/1xUpxSvMvPORvzGWNHtACvslCKMOW4B56qGqhMXN-Jtk/edit?usp=sharing
+v1.0 Writeup: https://docs.google.com/document/d/1xUpxSvMvPORvzGWNHtACvslCKMOW4B56qGqhMXN-Jtk/edit?usp=sharing
 
 
 
