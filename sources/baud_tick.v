@@ -13,10 +13,11 @@
 // 
 // Dependencies: 
 // 
-// Revision: 0.03
+// Revision: 0.04
 // Revision 0.01 - File Created
 // Revision 0.02 - Fixes
 // Revision 0.03 - Half tick gen
+// Revision 0.04 - Synthesis fix
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -38,16 +39,13 @@ module baud_tick#(parameter baud_rate = 115200)
     assign baud_half_tick = en && (counter == (cycles - 1)/2);
         
     always@(posedge clk100mhz or negedge rst_n) begin
-        if(!rst_n || !en || restart) begin 
-            counter <= 0;
-        end
+        if(!rst_n) counter <= 0;
         else begin
-            if(baud_tick) begin
-                counter <= 0;
-            end
+            if(!en || restart) counter <= 0;
             else begin
-                counter <= counter + 1;
-            end     
+                if(baud_tick) counter <= 0;
+                else counter <= counter + 1;  
+            end
         end
     end                     
                
